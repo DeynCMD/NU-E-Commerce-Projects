@@ -682,6 +682,17 @@ section {
     font-size: 17.6px;
 }
 
+.product-link {
+    display: block;
+    text-decoration: none;
+    color: inherit;
+}
+
+.uniform-overlay button {
+    position: relative;
+    z-index: 2;
+}
+
 /* Animation keyframes */
 @keyframes fadeInUp {
     from {

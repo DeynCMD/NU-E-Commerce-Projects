@@ -341,7 +341,7 @@ section {
 
 .product-title {
   color: #35408E;
-  font-size: 64px;
+  font-size: 55px;
   font-family: Inter, sans-serif;
   font-weight: 400;
 }
@@ -352,7 +352,7 @@ section {
   font-family: Inter, sans-serif;
 }
 
-.rating-container {
+/*.rating-container {
   display: flex;
   align-items: center;
   gap: 16px;
@@ -365,8 +365,7 @@ section {
   width: 198px;
   aspect-ratio: 4.61;
   object-fit: contain;
-}
-
+}*/
 .guarantee-title {
   color: #000001;
   font-size: 32px;
@@ -376,7 +375,7 @@ section {
 }
 
 .guarantee-icon {
-  width: 119px;
+  width: 45px;
   aspect-ratio: 0.93;
   object-fit: contain;
   align-self: center;

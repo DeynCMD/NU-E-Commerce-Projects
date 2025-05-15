@@ -53,11 +53,19 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <input type="text" name="id_number" required><br><br>
 
     <label>Branch:</label><br>
-    <select name="branch" required>
-      <option value="laguna">Laguna</option>
-      <option value="manila">Manila</option>
-      <option value="baliwag">Baliwag</option>
-    </select><br><br>
+    <select id="branch" name="branch" required>
+            <option value="laguna">Laguna</option>
+            <option value="manila">Manila</option>
+            <option value="fairview">Fairview</option>
+            <option value="clark">Clark</option>
+            <option value="baliwag">Baliwag</option>
+            <option value="nazareth">Nazareth School</option>
+            <option value="moa">Mall of Asia</option>
+            <option value="dasmariñas">Dasmariñas</option>
+            <option value="lipa">Lipa</option>
+            <option value="eastortigas">East Ortigas</option>
+            <option value="bacolod">Bacolod</option>
+          </select><br><br>
 
     <label>User Type:</label><br>
     <select name="user_type" required>

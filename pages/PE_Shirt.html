@@ -11,6 +11,7 @@
 
     <!-- css -->
     <link rel="stylesheet" href="../assets/style/product.css">
+
 </head>
 <body>
   <div class="product-page">
@@ -69,18 +70,18 @@
                   </a>
                   
                   <div class="profile-dropdown">
-                      <button id="profileBtn" class="nav-icon-btn" type="button">
-                          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                              <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
-                              <circle cx="12" cy="7" r="4"></circle>
-                          </svg>
-                      </button>
-                      <div id="profileMenu" class="profile-menu">
-                          <a href="profile.html" class="profile-item">View Profile</a>
-                          <a href="https://www.facebook.com/NUBulldogsExchangeOfficial/" target="_blank" class="profile-item">FB Page</a>
-                          <a href="new-login.html" class="profile-item">Logout</a>
-                      </div>
-                  </div>
+                        <a href="profile.php" class="nav-icon-btn">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                                <circle cx="12" cy="7" r="4"></circle>
+                            </svg>
+                        </a>                        
+                        <div id="profileMenu" class="profile-menu">
+                            <a href="profile.php" class="profile-item">View Profile</a>
+                            <a href="https://www.facebook.com/NUBulldogsExchangeOfficial/" target="_blank" class="profile-item">FB Page</a>
+                            <a href="new-login.html" class="profile-item">Logout</a>
+                        </div>
+                    </div>
               </div>
           </div>
       </div>
@@ -97,22 +98,26 @@
             </div>
             <div class="product-info">
               <div class="prod-title-price">
-                <h1 class="product-title">PE Shirt</h1><span><p class="product-price">260.00</p></span>
+                <h1 class="product-title">PE Shirt</h1><span><p class="product-price">250.00</p></span>
               </div>
-              <div class="rating-container">
+              <!--<div class="rating-container">
                 <span class="rating-score">4.9</span>
                 <img
                   src="../assets/images/stars.png"
                   class="rating-stars"
                   alt="Rating Stars"
                 />
-              </div>
-              <h3 class="guarantee-title">Shopping guarantee:</h3>
-              <img
+              </div> -->
+              <h3 class="guarantee-title">Shopping guarantee:
+                <img
                 src="../assets/images/guarantee.png"
                 class="guarantee-icon"
                 alt="Shopping Guarantee Icon"
               />
+              </h3>
+
+            <div class="review-container">
+            </div>
               <p class="guarantee-text">
                 100% Authentic · Merchandise Protection
               </p>
@@ -187,6 +192,7 @@
           />
       </footer>
     </main>
-  </div> 
+  </div>
+  <script src="Javascripts/profile.js"></script>
 </body>
 </html>
