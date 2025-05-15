@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NUBEX</title>
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="../assets/style/login.css">
+</head>
+
+<body>
+  <div class="login-page">
+    <div class="main-container">
+      <div class="left-column">
+        <div class="logo-container">
+          <img src="../assets/images/nulogo.png" class="logo-image" alt="National University Logo"/>
+          <div class="university-title-container">
+            <h1 class="university-title">NATIONAL<br/>UNIVERSITY</h1>
+            <hr class="yellow-line">
+          </div>
+          <p class="tagline">Education that works.</p>
+        </div>
+      </div>
+
+      <div class="login-box">
+        <p>Sign-In</p>
+        <form id="login-form" action="../backend/form.php" method="POST">
+          <label for="campus">Select Campus</label>
+          <select id="branch" name="branch" required>
+            <option value="laguna">Laguna</option>
+            <option value="manila">Manila</option>
+            <option value="fairview">Fairview</option>
+            <option value="clark">Clark</option>
+            <option value="baliwag">Baliwag</option>
+            <option value="nazareth">Nazareth School</option>
+            <option value="moa">Mall of Asia</option>
+            <option value="dasmariñas">Dasmariñas</option>
+            <option value="lipa">Lipa</option>
+            <option value="eastortigas">East Ortigas</option>
+            <option value="bacolod">Bacolod</option>
+          </select>
+
+          <label for="account-type">Select Account Type</label>
+          <select id="user_type" name="user_type" required>
+            <option value="student">Student</option>
+            <option value="staff">Admin</option>
+          </select>
+
+          <button type="submit" name="loginForm">Login</button>
+        </form>
+      </div>
+
+      <div class="right-column">
+        <ul class="branches-list">
+          <li>NU Manila</li>
+          <li>NU Nazareth School</li>
+          <li>NU Laguna</li>
+          <li>NU Mall of Asia</li>
+          <li>NU Fairview</li>
+          <li>NU Baliwag</li>
+          <li>NU Dasmariñas</li>
+          <li>NU Lipa</li>
+          <li>NU Clark</li>
+          <li>NU East Ortigas</li>
+          <li>NU Bacolod</li>
+        </ul>
+        <div class="school-contacts">
+          <li>www.national-u.edu.ph</li>
+          <li>facebook.com/NationalUniversityPhilippines</li>
+          <li>twitter.com/NationalUPhil</li>
+          <li>instagram.com/NationalUPH</li>
+          <li>Phone: (02) 8712-1900</li>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="Javascripts/login.js"></script>
+</body>
+</html>

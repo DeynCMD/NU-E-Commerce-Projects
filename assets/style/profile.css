@@ -1,0 +1,400 @@
+body {
+  background-color: #181d40;
+  align-items: center;
+  justify-content: center;
+}
+
+.profile-container {
+  background-color: #181d40;
+  padding-bottom: 114px;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+}
+
+/* navbar */
+.navbar {
+  background-color: #35408E !important;
+  position: sticky !important;
+  top: -1;
+  width: 100%;
+  z-index: 1000;
+}
+
+.navbar::after {
+  content: "";
+  position: absolute;
+  bottom: -13px;
+  left: 0;
+  width: 100%;
+  height: 13px;
+  background: radial-gradient( #ffd41c 0%, #997F11 100%);
+  z-index: -1;
+}
+
+.navbar-brand {
+  width: 125px;
+}
+
+.navbar-nav .nav-link {
+  font-size: 25px;
+  color: white !important;
+  margin-right: 10px;
+}
+
+
+.input-group {
+  margin: 0%px
+}
+
+.input-group .input-group-text {
+  border-top-left-radius: 25px;
+  border-bottom-left-radius: 25px;
+  border-right: none;
+}
+
+.input-group .search-input {
+  border-top-right-radius: 25px;
+  border-bottom-right-radius: 25px;
+  border-left: none;
+}
+
+.search-input {
+  margin-right: 15px;
+}
+
+.cart {
+  width: 32px;
+}
+
+/* content */
+.profile-content {
+  display: flex;
+  margin-top: 80px;
+  width: 100%;
+  align-items: center;
+  flex-direction: column;
+  background-color: rgba(24, 29, 64, 1);
+}
+
+.profile-title {
+  color: #ffffff;
+  font-size: 48px;
+  font-family:
+    Inter,
+    -apple-system,
+    Roboto,
+    Helvetica,
+    sans-serif;
+  font-weight: 700;
+  line-height: 1;
+  margin: 0;
+  margin-bottom: 5%;
+  margin-right: 70%;
+}
+
+.profile-details {
+  margin-top: 7px;
+  width: 100%;
+  max-width: 1114px;
+}
+
+.profile-info-container {
+  width: 100%;
+}
+
+.profile-info-sections {
+  gap: 20px;
+  display: flex;
+}
+
+.labels-section {
+  width: 26%;
+}
+
+.info-labels {
+  display: flex;
+  margin-top: 3px;
+  margin-bottom: auto;
+  flex-direction: column;
+  align-items: start;
+  font-family:
+    Inter,
+    -apple-system,
+    Roboto,
+    Helvetica,
+    sans-serif;
+  font-size: 36px;
+  color: #ffffff;
+  font-weight: 700;
+}
+
+.info-label {
+  margin: 0;
+  margin-bottom: 38px;
+  font-size: inherit;
+  font-weight: inherit;
+
+}
+
+.inputs-section {
+  width: 49%;
+}
+
+.info-inputs {
+  margin-top: auto;
+  margin-bottom: auto;
+}
+
+.info-input {
+  border-radius: 5px;
+  background-color: rgba(22, 20, 85, 1);
+  border: 2px solid rgba(50, 90, 62, 1);
+  color: white;
+  font-size: 25px;
+  font-family:
+    Inter,
+    -apple-system,
+    Roboto,
+    Helvetica,
+    sans-serif;
+    font-weight: 700;
+    text-align: center;
+  height: 56px;
+  width: 83%;
+  margin-bottom: 20px;
+  margin-left: 5%;
+}
+
+.inputs-section p{
+  color: white;
+  font-size: 25px;
+  font-family:
+    Inter,
+    -apple-system,
+    Roboto,
+    Helvetica,
+    sans-serif;
+    font-weight: 700;
+    text-align: center;
+    padding-top: 10px;
+}
+
+.editable-field {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.edit-button {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+.edit-button:hover {
+  background-color: #0056b3;
+}
+
+.profile-image-section {
+  width: 25%;
+}
+
+.profile-image {
+  aspect-ratio: 0.94;
+  object-fit: contain;
+  object-position: center;
+  width: 221px;
+  max-width: 100%;
+  margin-left: 30%;
+}
+
+.logout-button {
+  background-color: #dc3545;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  font-size: 16px;
+  font-weight: bold;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+  display: flex;
+  margin-top: 20px;
+  margin-left: 53%;
+}
+
+.logout-button:hover {
+  background-color: #c82333;
+}
+
+.additional-info {
+  align-self: center;
+  margin-top: 36px;
+  width: 685px;
+  max-width: 100%;
+}
+
+.additional-info-container {
+  gap: 20px;
+  display: flex;
+}
+
+.additional-labels {
+  width: 26%;
+}
+
+.additional-label-group {
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  font-family:
+    Inter,
+    -apple-system,
+    Roboto,
+    Helvetica,
+    sans-serif;
+  font-size: 24px;
+  color: #ffffff;
+  font-weight: 700;
+}
+
+.gender-label {
+  margin-top: 40px;
+}
+
+.birth-label {
+  margin-top: 20px;
+}
+
+.additional-inputs {
+  width: 74%;
+}
+
+.input-group {
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  align-items: start;
+  font-family:
+    Inter,
+    -apple-system,
+    Roboto,
+    Helvetica,
+    sans-serif;
+  font-size: 24px;
+  color: #ffffff;
+  font-weight: 700;
+  margin-left: 28%;
+}
+
+.add-button {
+  background: none;
+  border: none;
+  font-size: inherit;
+  font-weight: inherit;
+  color: inherit;
+  cursor: pointer;
+  padding: 0;
+}
+
+.gender-options {
+  display: flex;
+  margin-top: 67px;
+  width: 100%;
+  align-items: start;
+  gap: 10px;
+  justify-content: space-between;
+}
+
+.gender-option {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  cursor: pointer;
+}
+
+.radio-icon {
+  aspect-ratio: 1;
+  object-fit: contain;
+  object-position: center;
+  width: 14px;
+  align-self: start;
+  margin-top: 8px;
+}
+
+.birth-date {
+  margin-top: 51px;
+}
+
+/* footer */
+.divider {
+  width: 92%;
+  height: 13px;
+  margin: 100px 0 37px;
+  border: none;
+  background: radial-gradient( #ffd41c 0%, #997F11 100%);
+  opacity: 1;
+}
+
+.footer {
+  display: flex;
+  width: 90%;
+  max-width: 1663px;
+  gap: 100px;
+}
+
+.footer-content {
+  flex: 1;
+  display: flex;
+  gap: 20px;
+}
+
+.footer-section {
+  display: flex;
+  flex-direction: column;
+  gap: 29px;
+}
+
+.footer-title {
+  font-family: Inter, sans-serif;
+  font-size: 28px;
+  color: #fff;
+  font-weight: 700;
+  text-shadow: 0px 4px 6.7px rgba(0, 0, 0, 0.25);
+  margin: 0;
+}
+
+.footer-nav {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.footer-link {
+  font-family: Inter, sans-serif;
+  font-size: 20px;
+  color: #fff;
+  font-weight: 500;
+  text-decoration: none;
+  opacity: 0.7;
+  text-shadow: 0px 4px 6.7px rgba(0, 0, 0, 0.25);
+  line-height: 42px;
+}
+
+.copyright {
+  font-family: Poppins, sans-serif;
+  color: #edeef1;
+  margin: 188px 0 0;
+}
+
+.footer-image {
+  width: 274px;
+  aspect-ratio: 0.8;
+  opacity: 0.5;
+  object-fit: contain;
+}
+

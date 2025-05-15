@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NUBEX - Student Login</title>
+    <link rel="stylesheet" href="../assets/style/login.css">
+</head>
+<body>
+  <div class="login-page">
+    <div class="main-container">
+      <div class="left-column">
+        <div class="logo-container">
+          <img src="../assets/images/nulogo.png" class="logo-image" alt="National University Logo"/>
+          <div class="university-title-container">
+            <h1 class="university-title">NATIONAL<br/>UNIVERSITY</h1>
+            <hr class="yellow-line">
+          </div>
+          <p class="tagline">Education that works.</p>
+        </div>
+      </div>
+
+      
+      <div class="login-box">
+        <p>Student Login</p>
+        <form action="../backend/form.php" method="POST" autocomplete="off">
+          <label for="id-number">ID Number</label>
+          <input type="text" id="id-number" name="id_number" placeholder="Enter your Student Number" required>
+          
+          <label for="password">Password</label>
+          <input type="password" id="password" name="password" placeholder="Enter your Password" required>  
+          
+          <input type="hidden" id="branch" name="branch">
+          <input type="hidden" name="user_type" value="student">
+
+          
+          <button type="submit" name="loginForm">Login</button>
+      </form>
+
+      </div>
+      
+
+      <div class="right-column">
+        <ul class="branches-list">
+          <li>NU Manila</li>
+          <li>NU Nazareth School</li>
+          <li>NU Laguna</li>
+          <li>NU Mall of Asia</li>
+          <li>NU Fairview</li>
+          <li>NU Baliwag</li>
+          <li>NU Dasmariñas</li>
+          <li>NU Lipa</li>
+          <li>NU Clark</li>
+          <li>NU East Ortigas</li>
+          <li>NU Bacolod</li>
+        </ul>
+        <div class="school-contacts">
+          <li>www.national-u.edu.ph</li>
+          <li>facebook.com/NationalUniversityPhilippines</li>
+          <li>twitter.com/NationalUPhil</li>
+          <li>instagram.com/NationalUPH</li>
+          <li>Phone: (02) 8712-1900</li>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    document.getElementById('branch').value = sessionStorage.getItem('branch');
+    document.getElementById('user_type').value = sessionStorage.getItem('user_type');
+
+    console.log("Branch:", sessionStorage.getItem('branch'));
+    console.log("User Type:", sessionStorage.getItem('user_type'));
+  </script>
+</body>
+</html>

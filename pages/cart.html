@@ -1,0 +1,236 @@
+<!-- cart.html -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cart - NUBEX </title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../assets/style/cart.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="/pages/Javascripts/navbar.js"></script>
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg fixed-top">
+      <div class="container-fluid">
+          <a class="navbar-brand" href="dashboard.html">
+              <img src="../assets/images/bulldogs-exhange-logo.png" alt="Bulldogs Exchange Logo" class="logo-img">Bulldogs Exchange</a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarNav">
+              <ul class="navbar-nav">
+                  <li class="nav-item">
+                      <a class="nav-link" href="dashboard.html#new">New & Featured</a>
+                  </li>
+                  <li class="nav-item">
+                      <a class="nav-link" href="dashboard.html#uniforms">Uniforms</a>
+                  </li>
+                  <li class="nav-item">
+                      <a class="nav-link" href="dashboard.html#bags">Bags</a>
+                  </li>
+                  <li class="nav-item">
+                      <a class="nav-link" href="dashboard.html#accessories">Accessories</a>
+                  </li>
+              </ul>
+              <div class="nav-actions">
+                  <div class="search-wrapper">
+                      <button id="searchToggle" class="nav-icon-btn" type="button">
+                          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                              <circle cx="11" cy="11" r="8"></circle>
+                              <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                          </svg>
+                      </button>
+                      <div id="searchBar" class="search-bar">
+                          <form class="d-flex search-form" role="search">
+                              <input class="form-control" type="search" placeholder="Search..." aria-label="Search">
+                              <button class="search-btn" type="submit" aria-label="Search">
+                                  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                      <circle cx="11" cy="11" r="8"></circle>
+                                      <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                                  </svg>
+                              </button>
+                          </form>
+                      </div>
+                  </div>
+                  
+                  <a href="#">
+                      <button class="nav-icon-btn" type="button" aria-label="Shopping Cart">
+                          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                              <circle cx="9" cy="21" r="1"></circle>
+                              <circle cx="20" cy="21" r="1"></circle>
+                              <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
+                          </svg>
+                          <span class="cart-count">1</span>
+                      </button>
+                  </a>
+                  
+                  <div class="profile-dropdown">
+                    <a href="profile.php" class="nav-icon-btn">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                            <circle cx="12" cy="7" r="4"></circle>
+                        </svg>
+                    </a>            
+                      <div id="profileMenu" class="profile-menu">
+                          <a href="profile.html" class="profile-item">View Profile</a>
+                          <a href="https://www.facebook.com/NUBulldogsExchangeOfficial/" target="_blank" class="profile-item">FB Page</a>
+                          <a href="new-login.html" class="profile-item">Logout</a>
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </div>
+    </nav>
+
+    <!-- Cart Section -->
+    <section id="cart" class="cart-section">
+        <div class="container">
+            <div class="section-header" data-aos="fade-up">
+                <h2>Your Shopping Cart</h2>
+                <p>Review your items before proceeding to checkout</p>
+            </div>
+
+            <div class="cart-container" data-aos="fade-up" data-aos-delay="100">
+                <div class="cart-items">
+                    <div class="cart-header">
+                        <div class="header-product">Product</div>
+                        <div class="header-price">Price</div>
+                        <div class="header-quantity">Quantity</div>
+                        <div class="header-subtotal">Subtotal</div>
+                        <div class="header-actions">Actions</div>
+                    </div>
+                    
+                    <div class="cart-item">
+                        <div class="item-product">
+                            <img src="../assets/images/nushirt.png" alt="NU T-Shirt" class="item-image">
+                            <div class="item-details">
+                                <h3 class="item-name">NU T-Shirt</h3>
+                                <p class="item-variant">Size: Medium | Color: Blue</p>
+                            </div>
+                        </div>
+                        <div class="item-price">₱150.00</div>
+                        <div class="item-quantity">
+                            <button class="quantity-btn minus-btn">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <line x1="5" y1="12" x2="19" y2="12"></line>
+                                </svg>
+                            </button>
+                            <input type="number" min="1" value="1" class="quantity-input">
+                            <button class="quantity-btn plus-btn">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <line x1="12" y1="5" x2="12" y2="19"></line>
+                                    <line x1="5" y1="12" x2="19" y2="12"></line>
+                                </svg>
+                            </button>
+                        </div>
+                        <div class="item-subtotal">₱150.00</div>
+                        <div class="item-actions">
+                            <button class="remove-btn">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <polyline points="3 6 5 6 21 6"></polyline>
+                                    <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
+                                    <line x1="10" y1="11" x2="10" y2="17"></line>
+                                    <line x1="14" y1="11" x2="14" y2="17"></line>
+                                </svg>
+                                Remove
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <!-- Empty state message (hidden when items are present) -->
+                    <div class="empty-cart" style="display: none;">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round">
+                            <circle cx="9" cy="21" r="1"></circle>
+                            <circle cx="20" cy="21" r="1"></circle>
+                            <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
+                        </svg>
+                        <h3>Your cart is empty</h3>
+                        <p>Looks like you haven't added any products to your cart yet.</p>
+                        <a href="dashboard.html" class="btn-continue-shopping">Continue Shopping</a>
+                    </div>
+                </div>
+                
+                <div class="cart-summary">
+                    <h2>Order Summary</h2>
+                    
+                    <div class="summary-row">
+                        <span>Subtotal</span>
+                        <span>₱150.00</span>
+                    </div>
+                    
+                    <div class="summary-row">
+                        <span>Shipping</span>
+                        <span>Free</span>
+                    </div>
+                    
+                    <div class="summary-row total-row">
+                        <span>Total</span>
+                        <span>₱150.00</span>
+                    </div>
+                    <button class="btn-checkout" onclick="window.location.href='payment.html'">PROCEED TO CHECKOUT</button>
+                    <a href="dashboard.html" class="btn-continue-shopping">Continue Shopping</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+      <div class="footer-content">
+          <div class="footer-column">
+              <h3>Resources</h3>
+              <ul>
+                  <li><a href="#" class="feedback-link">Send Us Feedback</a></li>
+                  <li><a href="#" class="size-guide-link">Size Guide</a></li>
+                  <li><a href="#" class="shipping-link">Shipping Information</a></li>
+              </ul>
+          </div>
+          <div class="footer-column">
+              <h3>Help</h3>
+              <ul>
+                  <li><a href="#" class="help-link">Get Help</a></li>
+                  <li><a href="#" class="returns-link">Returns</a></li>
+                  <li><a href="#" class="payment-link">Payment Options</a></li>
+                  <li><a href="#" class="contact-link">Contact Us</a></li>
+              </ul>
+          </div>
+          <div class="footer-column">
+              <h3>About Us</h3>
+              <ul>
+                  <li><a href="#" class="about-link">About NU Bulldogs Exchange</a></li>
+                  <li><a href="#" class="news-link">News</a></li>
+                  <li><a href="#" class="careers-link">Careers</a></li>
+              </ul>
+          </div>
+          <!-- <div class="footer-logo">
+              <img src="../images/nu-logo.png" alt="NU Logo">
+              <p class="copyright">© 2025 NU Bulldogs Exchange. All rights reserved.</p>
+          </div> -->
+      </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="Javascripts/cart.js"></script>
+    <script>
+        // Initialize AOS
+        document.addEventListener('DOMContentLoaded', function() {
+            AOS.init({
+                duration: 800,
+                easing: 'ease',
+                once: true
+            });
+        });
+    
+
+
+    
+
+
+    </script>
+</body>
+</html>

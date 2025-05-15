@@ -1,0 +1,158 @@
+/* login.css */
+
+body {
+  margin: 0%;
+}
+
+.login-page {
+  background: #181D40;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  height: 100vh;
+  font-family:
+    Inter,
+    -apple-system,
+    Roboto,
+    Helvetica,
+    sans-serif;
+}
+
+.main-container {
+  display: flex;
+  width: 100%;
+}
+
+.left-column {
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: white;
+  text-align: center;
+  margin-right: 25%;
+}
+
+.logo-image {
+  width: 226px;
+  margin-bottom: -15px;
+}
+
+.university-title {
+  font-size: 74px;
+  font-weight: bold;
+  line-height: 1.2;
+  margin-bottom: 2%;
+}
+
+.yellow-line {
+  background-color: #FFD41C;
+  height: 3px;
+  text-align: center;
+  width: 390px;
+  margin: 10px auto;
+}
+
+.tagline {
+  font-style: italic;
+  font-size: 44px;
+  font-weight: bold;
+  margin: 2%;
+  width: 100%;
+}
+
+.right-column {
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: white;
+  margin-left: 15%;
+  text-align: left;
+}
+
+.branches-list{
+  list-style: none;
+  margin-top: 3%;
+  margin-left: 16%;
+  margin-bottom: 0%;
+  font-size: 30px;
+  font-weight: bold;
+}
+
+.school-contacts {
+  list-style: none;
+  margin-left: 30%;
+  font-size: 15px;
+  line-height: 1.5;
+}
+
+
+.login-box {
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    width: 300px;
+    position: absolute;
+    top: 50%;
+    height: 30%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+}
+
+.login-box p {
+    color: #1A237E; 
+    text-align: start;
+    margin-bottom: 30px;
+    font-size: 20px;
+}
+
+.login-box label {
+    display: block;
+    margin-top: 10px;
+    text-align: start;
+    color: #1A237E; 
+}
+
+.login-box select{
+  background: #FFD700; 
+  color: #1A237E; 
+  font-size: 16px;
+  border: none;
+  width: 100%;
+  padding: 10px;
+  margin-top: 5px;
+  text-align: center;
+  border-radius: 25px; 
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.login-box button {
+  background: #FFD700; 
+  color: #1A237E; 
+  margin-top: 20px;
+  font-size: 16px;
+  border: none;
+  padding: 10px 20px;
+  width: 40%;
+  border-radius: 25px; 
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.login-box button:hover {
+  background: #FFC107;
+}
+
+.login-box input {
+  background: #FFD700;
+  width: 80%;
+  padding: 10px;
+  margin-top: 5px;
+  border-radius: 25px;
+  border: 1px solid #ccc;
+  font-size: 16px;
+}
