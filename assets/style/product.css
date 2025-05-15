@@ -299,7 +299,7 @@ section {
 .product-section {
   display: flex;
   flex-direction: column;
-  max-width: 1451px;
+  max-width: 80%;
   margin: 0 auto;
   gap: 45px;
 }
@@ -367,7 +367,7 @@ section {
   object-fit: contain;
 }*/
 .guarantee-title {
-  color: #000001;
+  color: #35408E;
   font-size: 32px;
   font-family: Inter, sans-serif;
   font-weight: 400;
@@ -433,9 +433,7 @@ section {
 }
 
 .product-specs {
-  margin-top: 76px;
-  margin-left: 139px;
-  max-width: 766px;
+  max-width: 680px;
 }
 
 .specs-container {
@@ -452,8 +450,8 @@ section {
 }
 
 .specs-title {
-  color: #000001;
-  font-size: 64px;
+  color: #35408E;
+  font-size: 40px;
   font-family: Inter, sans-serif;
   margin-bottom: 31px;
 }
@@ -463,6 +461,29 @@ section {
   font-size: 30px;
   color: #000000;
   margin-bottom: 32px;
+}
+
+.size-selector {
+    display: flex;
+    justify-content: start;
+    gap: 8px;
+}
+
+.size-btn {
+    width: 80px;
+    height: 80px;
+    border: 2px solid var(--color-accent);
+    background: #35408E;
+    color: var(--color-text);
+    border-radius: 50%;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-size: 30px;
+}
+
+.size-btn:hover, .size-btn.selected {
+    background: var(--color-accent);
+    color: var(--color-primary);
 }
 
 /* footer */

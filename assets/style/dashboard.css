@@ -676,16 +676,15 @@ section {
     font-size: 19.2px;
 }
 
-.uniform-price {
-    color: var(--color-accent);
-    font-weight: 600;
-    font-size: 17.6px;
-}
-
 .product-link {
     display: block;
     text-decoration: none;
     color: inherit;
+}
+
+.uniform-overlay button {
+    position: relative;
+    z-index: 2;
 }
 
 .uniform-overlay button {
