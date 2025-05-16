@@ -25,10 +25,18 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarNav">
           <ul class="navbar-nav">
-            <li class="nav-item"><a class="nav-link" href="dashboard.html#new">New & Featured</a></li>
-            <li class="nav-item"><a class="nav-link" href="dashboard.html#uniforms">Uniforms</a></li>
-            <li class="nav-item"><a class="nav-link" href="dashboard.html#bags">Bags</a></li>
-            <li class="nav-item"><a class="nav-link" href="dashboard.html#accessories">Accessories</a></li>
+            <li class="nav-item">
+                      <a class="nav-link" href="dashboard.php#new">New & Featured</a>
+                  </li>
+                  <li class="nav-item">
+                      <a class="nav-link" href="dashboard.php#uniforms">Uniforms</a>
+                  </li>
+                  <li class="nav-item">
+                      <a class="nav-link" href="dashboard.php#bags">Bags</a>
+                  </li>
+                  <li class="nav-item">
+                      <a class="nav-link" href="dashboard.php#accessories">Accessories</a>
+                  </li>
           </ul>
           <div class="nav-actions ms-auto d-flex align-items-center gap-2">
             <div class="search-wrapper">
@@ -69,6 +77,7 @@
           <div class="product-details">
             <div class="product-image-container">
               <img src="../assets/images/PE_Shirt.jpg" class="product-image" alt="NU T-Shirt" />
+              <p class="guarantee-text">100% Authentic · Merchandise Protection</p>
             </div>
             <div class="product-info">
               <div class="prod-title-price d-flex align-items-baseline justify-content-between">
@@ -103,8 +112,6 @@
               <button class="size-btn">XL</button>
             </div>
           </div>
-              <p class="guarantee-text">100% Authentic · Merchandise Protection</p>
-
               <div class="action-buttons">
                 <button class="add-cart-btn">
                   ADD TO CART
@@ -117,7 +124,21 @@
               </div>
             </div>
           </div>
-
+          <div class="review-container">
+            <p class="review-texts">REVIEWS</p>
+            <div class="review-user">
+              <div class="input-box">
+                <label>Write your own review in 100 characters</label>
+                  <div class="input-wrapper">
+                  <input type="text" id="reviewInput" maxlength="100" placeholder="Share some thoughts about the product" />
+                  <button id="submitReviewBtn">➔</button>
+                </div>
+              </div>
+              <div id="reviewList" class="review-list">
+              <!-- User reviews will appear here -->
+              </div>
+            </div>
+          </div>
         </div>
       </section>
 
@@ -146,5 +167,7 @@
   </div>
 
   <script src="Javascripts/profile.js"></script>
+  <script src="Javascripts/reviews.js"></script>
+
 </body>
 </html>

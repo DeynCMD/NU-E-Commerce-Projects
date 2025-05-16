@@ -1,92 +1,100 @@
-// dashboard-uniforms.js
-
-document.addEventListener('DOMContentLoaded', function() {
-    // Size selector functionality
-    const sizeBtns = document.querySelectorAll('.size-btn');
-    
-    sizeBtns.forEach(btn => {
-        btn.addEventListener('click', function() {
-            // Remove selected class from all buttons in this size selector
-            const parentSelector = this.closest('.size-selector');
-            parentSelector.querySelectorAll('.size-btn').forEach(b => {
-                b.classList.remove('selected');
-            });
-            
-            // Add selected class to clicked button
-            this.classList.add('selected');
-        });
-    });
-
-    // Add to cart animation
-    const addCartBtns = document.querySelectorAll('.add-cart-btn');
-    
-    addCartBtns.forEach(btn => {
-        btn.addEventListener('click', function() {
-            // Check if size is selected
-            const sizeSelector = this.closest('.uniform-overlay').querySelector('.size-selector');
-            const selectedSize = sizeSelector.querySelector('.size-btn.selected');
-            
-            if (!selectedSize) {
-                alert('Please select a size first!');
-                return;
-            }
-            
-            // Add success animation
-            this.classList.add('added');
-            this.style.backgroundColor = '#4CAF50';
-            this.innerHTML = '<span class="btn-text">Added!</span> ✓';
-            
-            setTimeout(() => {
-                this.classList.remove('added');
-                this.innerHTML = '<span class="btn-text">Add to Cart</span><span class="btn-icon">🛒</span>';
-            }, 2000);
-            
-            // Here you would typically add the item to cart functionality
-        });
-    });
-});
-
 document.addEventListener("DOMContentLoaded", function () {
-    const addToCartButtons = document.querySelectorAll(".add-cart-btn");
+    const container = document.querySelector("body"); // Or a more specific container wrapping your product cards
 
-    addToCartButtons.forEach(button => {
-        button.addEventListener("click", function () {
-            const uniformCard = this.closest(".uniform-card");
-            const itemName = uniformCard.querySelector("h3").textContent;
-            const itemPrice = uniformCard.querySelector(".uniform-price").textContent;
-            const itemImage = uniformCard.querySelector(".uniform-image").src;
-            const selectedSize = uniformCard.querySelector(".size-btn.active")?.textContent || "M"; // Default size M
-
-            let cartItems = JSON.parse(localStorage.getItem("cart")) || [];
-
-            const existingItem = cartItems.find(item => item.name === itemName && item.size === selectedSize);
-
-            if (existingItem) {
-                existingItem.quantity += 1;
-            } else {
-                cartItems.push({
-                    name: itemName,
-                    price: itemPrice,
-                    image: itemImage,
-                    size: selectedSize,
-                    quantity: 1
-                });
-            }
-
-            localStorage.setItem("cart", JSON.stringify(cartItems));
-
-            alert("Item added to cart!");
-
-            // ✅ **Manually trigger the storage event for instant updates**
-            window.dispatchEvent(new Event("storage"));
-        });
+    // Handle size button selection with event delegation
+    container.addEventListener("click", function (event) {
+        const sizeBtn = event.target.closest(".size-btn");
+        if (sizeBtn) {
+            const parent = sizeBtn.closest(".size-selector");
+            if (!parent) return;
+            parent.querySelectorAll(".size-btn").forEach(btn => btn.classList.remove("selected"));
+            sizeBtn.classList.add("selected");
+        }
     });
 
-    // Handle size selection
-    document.querySelectorAll(".size-btn").forEach(button => {
-        button.addEventListener("click", function () {
-            this.parentElement.querySelectorAll(".size-btn").forEach(btn => btn.classList.remove("active"));
-            this.classList.add("active");
-        });
+    // Handle Add to Cart button clicks with event delegation
+    container.addEventListener("click", function (event) {
+        const button = event.target.closest(".add-cart-btn");
+        if (!button) return;
+
+        const uniformCard = button.closest(".uniform-card");
+        if (!uniformCard) return;
+
+        const itemNameRaw = uniformCard.querySelector("h3")?.textContent || "";
+        const itemPrice = uniformCard.querySelector(".uniform-price")?.textContent || "";
+        const itemImage = uniformCard.querySelector(".uniform-image")?.src || "";
+        const selectedSizeRaw = uniformCard.querySelector(".size-btn.selected")?.textContent;
+
+        if (!selectedSizeRaw) {
+            alert("Please select a size first!");
+            return;
+        }
+
+        // Animate button feedback
+        button.classList.add("added");
+        button.style.backgroundColor = "#4CAF50";
+        button.innerHTML = '<span class="btn-text">Added!</span> ✓';
+
+        setTimeout(() => {
+            button.classList.remove("added");
+            button.innerHTML = '<span class="btn-text">Add to Cart</span><span class="btn-icon">🛒</span>';
+            button.style.backgroundColor = "";
+        }, 2000);
+
+        // Normalize strings for comparison (trim & lowercase)
+        const itemName = itemNameRaw.trim().toLowerCase();
+        const selectedSize = selectedSizeRaw.trim().toLowerCase();
+
+        // Load existing cart or create new
+        let cartItems = JSON.parse(localStorage.getItem("cart")) || [];
+
+        // Find existing item with same name and size (case insensitive)
+        const existingItem = cartItems.find(item =>
+            item.name.trim().toLowerCase() === itemName &&
+            item.size.trim().toLowerCase() === selectedSize
+        );
+
+        if (existingItem) {
+            existingItem.quantity += 1;
+        } else {
+            cartItems.push({
+                name: itemNameRaw.trim(), // keep original casing for display
+                price: itemPrice.trim(),
+                image: itemImage,
+                size: selectedSizeRaw.trim(), // original casing for display
+                quantity: 1
+            });
+        }
+
+        // Save updated cart back to localStorage
+        localStorage.setItem("cart", JSON.stringify(cartItems));
+
+        // Update cart count immediately on page
+        updateCartCount();
+
+        // Fire a custom event to let other parts of the app know cart changed
+        window.dispatchEvent(new Event("cart-updated"));
+
+        // Optional alert for user feedback
+        alert("Item added to cart!");
     });
+
+    // Initial cart count update on page load
+    updateCartCount();
 });
+
+// Function to update the cart item count badge
+function updateCartCount() {
+    let cartItems = JSON.parse(localStorage.getItem("cart")) || [];
+    let totalCount = cartItems.reduce((count, item) => count + item.quantity, 0);
+    const cartCountElement = document.querySelector(".cart-count");
+    if (cartCountElement) {
+        cartCountElement.textContent = totalCount;
+    }
+}
+
+// Optional: If you want your cart page or other scripts to update live, add a listener like this somewhere:
+// window.addEventListener("cart-updated", () => {
+//     updateCartCount();
+//     // and/or reload cart items display
+// });

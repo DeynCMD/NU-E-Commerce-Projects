@@ -371,7 +371,6 @@ section {
   font-size: 32px;
   font-family: Inter, sans-serif;
   font-weight: 400;
-  margin-top: 10px;
 }
 
 .guarantee-icon {
@@ -387,6 +386,7 @@ section {
   font-family: Inter, sans-serif;
   font-weight: 400;
   margin-left: 30px;
+  margin-top: 13%;
 }
 
 .action-buttons {
@@ -484,6 +484,157 @@ section {
 .size-btn:hover, .size-btn.selected {
     background: var(--color-accent);
     color: var(--color-primary);
+}
+
+.review-container{
+  max-width: 160vh;
+  height: 70vh;
+  margin: auto;
+  margin-top: 40px;
+  border-radius: 8px;
+  padding: 1rem;
+  background-color: #11113a;
+}
+
+.review-texts{
+  margin-left: 20px;
+  color: #FFD700;
+}
+
+
+.review-label{
+  color: #FFD700;
+}
+
+.review-user{
+  height: 40vh;
+  max-width: 80%;
+  margin: auto;
+}
+
+.input-box {
+  background-color: #2d2d7a;
+  padding: 1rem;
+  border-radius: 10px;
+  margin-bottom: 1rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.input-box input {
+  padding: 0.5rem;
+  border-radius: 6px;
+  border: none;
+  margin-top: 0.5rem;
+  font-size: 1rem;
+}
+
+
+
+.input-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.input-wrapper input {
+  width: 100%;
+  height: 10vh;
+  padding: 0.5rem 2.5rem 0.5rem 0.5rem;
+  border-radius: 6px;
+  border: none;
+  font-size: 1rem;
+  background-color: #0a0a23;
+  color: white;
+}
+
+.input-wrapper button {
+  align-self: flex-end;
+  margin-top: 0.5rem;
+  background-color: transparent;
+  border: 2px solid gold;
+  color: gold;
+  padding: 0.5rem;
+  margin-bottom: 20px;
+  margin-left: 10px;
+  border-radius: 50%;
+  cursor: pointer;
+  font-size: 1rem;
+}
+
+.review-list {
+  margin-top: 1rem;
+  max-height: 40vh; /* Adjust this height to fit about 2 reviews */
+  overflow-y: auto;  /* Enables vertical scrolling */
+  padding: 8px;
+  background-color: transparent;
+  scroll-behavior: smooth;
+}
+
+.underline {
+  height: 1px;
+  background-color: #454545;
+  width: 100%;
+  margin-top: 4px;
+}
+
+.review-list::-webkit-scrollbar {
+  display: none;
+}
+
+.review-item {
+  background-color: #0a0a23;
+  border-top: 1px solid #333;
+  padding: 1rem;
+  display: flex;
+  align-items: center;
+  
+}
+
+.review-item img {
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  margin-right: 1rem;
+}
+
+.review-content {
+  display: flex;
+  flex-direction: column;
+  
+}
+
+
+.review-author {
+  font-weight: bold;
+  color: gold;
+}
+
+.review-text {
+  color: #cccccc;
+  margin-top: 10px;
+}
+.underline-text{
+  width: 100vh;
+  height: 2px;
+  background: gold;
+}
+
+.delete-btn{
+  background-color: #e74c3c;
+  color: white;
+  border: none;
+  padding: 5px 8px;
+  margin-left: 10px;
+  border-radius: 3px;
+  cursor: pointer;
+  font-size: 12px;
+  align-items: end;
+  margin-left: 5%;
+}
+
+.delete-btn:hover {
+  background-color: #c0392b;
 }
 
 /* footer */

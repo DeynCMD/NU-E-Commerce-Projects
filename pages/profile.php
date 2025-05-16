@@ -1,26 +1,30 @@
 <?php
 session_start();
 
-// Debugging: Print session data
+// Check if user is logged in
 if (!isset($_SESSION['id_number'])) {
     echo "Session not set! Redirecting to login...";
-    header("Refresh:3; url=login.html"); // Redirect after 3 seconds
+    header("Refresh:3; url=login.html");
     exit();
 }
 
-// Now fetch user details
+// DB connection
 require '../backend/config/connection.php';
 
 $id_number = $_SESSION['id_number'];
 
-$query = "SELECT name, email FROM user_table WHERE id_number = ?";
+// Fetch user profile info
+$query = "SELECT name, email, profile_pic FROM user_table WHERE id_number = ?";
 $stmt = $connection->prepare($query);
 $stmt->bind_param("s", $id_number);
 $stmt->execute();
-$stmt->bind_result($name, $email);
+$stmt->bind_result($name, $email, $profilePic);
 $stmt->fetch();
 $stmt->close();
+
+$profilePic = $profilePic ? "../uploads/$profilePic" : "../assets/images/default.png";
 ?>
+
 
 
 <!DOCTYPE html>
@@ -38,27 +42,80 @@ $stmt->close();
     <link rel="stylesheet" href="../assets/style/profile.css">
 </head>
 <body>
-  <div class="profile-container">
-    <nav class="navbar navbar-expand-lg sticky-top">
+
+<!-- Navbar -->
+    <nav class="navbar navbar-expand-lg fixed-top">
       <div class="container-fluid">
-        <a target="_blank" href="https://www.facebook.com/NUBulldogsExchangeOfficial/">
-          <img class="navbar-brand" src="../assets/images/nube.png" alt="NU Bulldogs Exchange">
-        </a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-          <ul class="navbar-nav ms-auto me-auto">
-            <li class="nav-item" href="dashboard.html#new"><a class="nav-link active" href="dashboard.html#new">New & Featured</a></li>
-            <li class="nav-item"><a class="nav-link" href="dashboard.html#uniforms">Uniforms</a></li>
-            <li class="nav-item"><a class="nav-link" href="dashboard.html#bags">Bag</a></li>
-            <li class="nav-item"><a class="nav-link" href="dashboard.html#accessories">Accessories</a></li>
-          </ul>
-        </div>
-        <a href="#"><img class="cart" src="../assets/images/cart.png" alt="Shopping Cart"></a>
+          <a class="navbar-brand" href="dashboard.html">
+              <img src="../assets/images/bulldogs-exhange-logo.png" alt="Bulldogs Exchange Logo" class="logo-img">Bulldogs Exchange</a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarNav">
+              <ul class="navbar-nav">
+                  <li class="nav-item">
+                      <a class="nav-link" href="dashboard.html#new">New & Featured</a>
+                  </li>
+                  <li class="nav-item">
+                      <a class="nav-link" href="dashboard.html#uniforms">Uniforms</a>
+                  </li>
+                  <li class="nav-item">
+                      <a class="nav-link" href="dashboard.html#bags">Bags</a>
+                  </li>
+                  <li class="nav-item">
+                      <a class="nav-link" href="dashboard.html#accessories">Accessories</a>
+                  </li>
+              </ul>
+              <div class="nav-actions">
+                  <div class="search-wrapper">
+                      <button id="searchToggle" class="nav-icon-btn" type="button">
+                          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                              <circle cx="11" cy="11" r="8"></circle>
+                              <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                          </svg>
+                      </button>
+                      <div id="searchBar" class="search-bar">
+                          <form class="d-flex search-form" role="search">
+                              <input class="form-control" type="search" placeholder="Search..." aria-label="Search">
+                              <button class="search-btn" type="submit" aria-label="Search">
+                                  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                      <circle cx="11" cy="11" r="8"></circle>
+                                      <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                                  </svg>
+                              </button>
+                          </form>
+                      </div>
+                  </div>
+                  
+                  <a href="#">
+                      <button class="nav-icon-btn" type="button" aria-label="Shopping Cart">
+                          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                              <circle cx="9" cy="21" r="1"></circle>
+                              <circle cx="20" cy="21" r="1"></circle>
+                              <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
+                          </svg>
+                          <span class="cart-count">1</span>
+                      </button>
+                  </a>
+                  
+                  <div class="profile-dropdown">
+                    <a href="profile.php" class="nav-icon-btn">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                            <circle cx="12" cy="7" r="4"></circle>
+                        </svg>
+                    </a>            
+                      <div id="profileMenu" class="profile-menu">
+                          <a href="profile.html" class="profile-item">View Profile</a>
+                          <a href="https://www.facebook.com/NUBulldogsExchangeOfficial/" target="_blank" class="profile-item">FB Page</a>
+                          <a href="new-login.html" class="profile-item">Logout</a>
+                      </div>
+                  </div>
+              </div>
+          </div>
       </div>
-    </nav>
-    
+    </nav> 
+  <div class="profile-container">
     <main class="profile-content">
       <h1 class="profile-title">My Profile</h1>
       <section class="profile-details">
@@ -84,7 +141,12 @@ $stmt->close();
               </div>
             </div>
             <div class="profile-image-section">
-              <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/e6f99c9bafa5631cfe6f20364823d9361a17cb2ba9931867d5d2fd51b543abe4" class="profile-image" alt="Profile Picture" />
+              <img src="<?php echo $profilePic ?? 'default.png'; ?>" class="profile-image" alt="Profile Picture" />
+              <form class="uploadForm" action="../backend/upload_profile_pic.php" method="POST" enctype="multipart/form-data">
+                <input type="file" name="profile_image" id="fileInput" accept="image/*" required hidden>
+                <label for="fileInput" class="custom-file-btn">Choose File</label>
+                <button type="submit" class="upload-btn">Upload</button>
+              </form>
               <button class="logout-button" onclick="window.location.href='login.html'">Logout</button>
             </div>
           </div>

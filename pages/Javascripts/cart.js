@@ -1,31 +1,95 @@
 document.addEventListener("DOMContentLoaded", function () {
     loadCartItems();
+    updateCartCount();
 
-    
+    // Listen for cross-tab localStorage changes
     window.addEventListener("storage", function (event) {
         if (event.key === "cart") {
             loadCartItems();
+            updateCartCount();
         }
     });
 
-    
-    document.querySelector(".cart-items").addEventListener("click", function (event) {
-        if (event.target.classList.contains("plus-btn")) {
-            updateQuantity(event.target.dataset.index, 1, event.target);
-        } else if (event.target.classList.contains("minus-btn")) {
-            updateQuantity(event.target.dataset.index, -1, event.target);
-        } else if (event.target.classList.contains("remove-btn")) {
-            removeFromCart(event.target.dataset.index);
-        }
+    // Listen for custom cart-update event
+    window.addEventListener("cart-updated", function () {
+        loadCartItems();
+        updateCartCount();
+    });
+
+    const cartItemsContainer = document.querySelector(".cart-items");
+    if (cartItemsContainer) {
+        cartItemsContainer.addEventListener("click", function (event) {
+            if (event.target.classList.contains("plus-btn")) {
+                event.preventDefault();
+                updateQuantity(event.target.dataset.index, 1, event.target);
+            } else if (event.target.classList.contains("minus-btn")) {
+                event.preventDefault();
+                updateQuantity(event.target.dataset.index, -1, event.target);
+            } else if (event.target.classList.contains("remove-btn")) {
+                event.preventDefault();
+                removeFromCart(event.target.dataset.index);
+            }
+        });
+    }
+
+    // Add to cart buttons — attach only once
+    document.querySelectorAll(".add-cart-btn").forEach(button => {
+        // Remove any previous listeners (in case of re-run)
+        button.replaceWith(button.cloneNode(true));
+    });
+    document.querySelectorAll(".add-cart-btn").forEach(button => {
+        button.addEventListener("click", function (event) {
+            event.preventDefault();
+
+            const uniformCard = this.closest(".uniform-card");
+            const itemName = uniformCard.querySelector("h3").textContent.trim();
+            const itemPrice = uniformCard.querySelector(".uniform-price").textContent.trim();
+            const itemImage = uniformCard.querySelector(".uniform-image").src;
+            const selectedSize = uniformCard.querySelector(".size-btn.selected")?.textContent.trim();
+
+            if (!selectedSize) {
+                alert("Please select a size first!");
+                return;
+            }
+
+            // Load existing cart
+            let cartItems = JSON.parse(localStorage.getItem("cart")) || [];
+
+            // Find existing item by name and size (case-insensitive)
+            const existingItem = cartItems.find(item =>
+                item.name.toLowerCase() === itemName.toLowerCase() &&
+                item.size.toLowerCase() === selectedSize.toLowerCase()
+            );
+
+            if (existingItem) {
+                existingItem.quantity += 1;
+            } else {
+                cartItems.push({
+                    name: itemName,
+                    price: itemPrice,
+                    image: itemImage,
+                    size: selectedSize,
+                    quantity: 1
+                });
+            }
+
+            // Save to storage
+            localStorage.setItem("cart", JSON.stringify(cartItems));
+
+            // Update UI immediately
+            updateCartCount();
+            window.dispatchEvent(new Event("cart-updated"));
+        });
     });
 });
 
 function loadCartItems() {
     const cartContainer = document.querySelector(".cart-items");
-    const cartSummary = document.querySelector(".cart-summary");
     const emptyCartMessage = document.querySelector(".empty-cart");
 
     let cartItems = JSON.parse(localStorage.getItem("cart")) || [];
+
+    if (!cartContainer) return;
 
     cartContainer.innerHTML = `
         <div class="cart-header">
@@ -38,18 +102,17 @@ function loadCartItems() {
     `;
 
     if (cartItems.length === 0) {
-        emptyCartMessage.style.display = "block";
-        cartSummary.style.display = "none";
+        if (emptyCartMessage) emptyCartMessage.style.display = "block";
+        updateTotalPrice(0);
         return;
     } else {
-        emptyCartMessage.style.display = "none";
-        cartSummary.style.display = "block";
+        if (emptyCartMessage) emptyCartMessage.style.display = "none";
     }
 
     let totalPrice = 0;
 
     cartItems.forEach((item, index) => {
-        const priceValue = parseFloat(item.price.replace("₱", "").replace(",", ""));
+        const priceValue = parseFloat(item.price.replace("₱", "").replace(/,/g, ""));
         const subtotal = priceValue * item.quantity;
         totalPrice += subtotal;
 
@@ -76,7 +139,7 @@ function loadCartItems() {
         `;
     });
 
-    document.querySelector(".summary-row.total-row span:last-child").textContent = `₱${totalPrice.toFixed(2)}`;
+    updateTotalPrice(totalPrice);
 }
 
 function updateQuantity(index, change, button) {
@@ -86,20 +149,20 @@ function updateQuantity(index, change, button) {
         cartItems[index].quantity += change;
         if (cartItems[index].quantity < 1) cartItems[index].quantity = 1;
 
-        
         localStorage.setItem("cart", JSON.stringify(cartItems));
 
-        
+        updateCartCount();
+        window.dispatchEvent(new Event("cart-updated"));
+
         const cartItem = button.closest(".cart-item");
         const quantityInput = cartItem.querySelector(".quantity-input");
         const subtotalElement = cartItem.querySelector(".item-subtotal");
 
-        const priceValue = parseFloat(cartItems[index].price.replace("₱", "").replace(",", ""));
+        const priceValue = parseFloat(cartItems[index].price.replace("₱", "").replace(/,/g, ""));
         const newSubtotal = priceValue * cartItems[index].quantity;
 
-        quantityInput.value = cartItems[index].quantity; 
-        subtotalElement.textContent = `₱${newSubtotal.toFixed(2)}`; 
-
+        quantityInput.value = cartItems[index].quantity;
+        subtotalElement.textContent = `₱${newSubtotal.toFixed(2)}`;
 
         updateTotalPrice();
     }
@@ -111,24 +174,37 @@ function removeFromCart(index) {
 
     localStorage.setItem("cart", JSON.stringify(cartItems));
 
+    updateCartCount();
+    window.dispatchEvent(new Event("cart-updated"));
 
-    document.querySelector(`.cart-item[data-index="${index}"]`).remove();
-
-
+    loadCartItems();
     updateTotalPrice();
+}
 
+function updateTotalPrice(total = null) {
+    let totalPrice;
+    if (total !== null) {
+        totalPrice = total;
+    } else {
+        let cartItems = JSON.parse(localStorage.getItem("cart")) || [];
+        totalPrice = cartItems.reduce((total, item) => {
+            let priceValue = parseFloat(item.price.replace("₱", "").replace(/,/g, ""));
+            return total + priceValue * item.quantity;
+        }, 0);
+    }
 
-    if (cartItems.length === 0) {
-        loadCartItems();
+    const summaryRows = document.querySelectorAll(".cart-summary .summary-row span:last-child");
+    if (summaryRows.length >= 3) {
+        summaryRows[0].textContent = `₱${totalPrice.toFixed(2)}`;  // subtotal
+        summaryRows[2].textContent = `₱${totalPrice.toFixed(2)}`;  // total
     }
 }
 
-function updateTotalPrice() {
+function updateCartCount() {
     let cartItems = JSON.parse(localStorage.getItem("cart")) || [];
-    let totalPrice = cartItems.reduce((total, item) => {
-        let priceValue = parseFloat(item.price.replace("₱", "").replace(",", ""));
-        return total + priceValue * item.quantity;
-    }, 0);
-
-    document.querySelector(".summary-row.total-row span:last-child").textContent = `₱${totalPrice.toFixed(2)}`;
+    let totalCount = cartItems.reduce((count, item) => count + item.quantity, 0);
+    const cartCountElement = document.querySelector(".cart-count");
+    if (cartCountElement) {
+        cartCountElement.textContent = totalCount;
+    }
 }
