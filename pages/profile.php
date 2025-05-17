@@ -178,5 +178,33 @@ $profilePic = $profilePic ? "../uploads/$profilePic" : "../assets/images/default
   </div>
 
   <script src="Javascripts/profile.js"></script>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+    updateCartCount(); // Show initial count
+
+    // 👂 Listen for cart updates in same tab
+    window.addEventListener("cart-updated", () => {
+        updateCartCount();
+    });
+
+    // 👂 Listen for updates from other tabs
+    window.addEventListener("storage", (e) => {
+        if (e.key === "cart") {
+            updateCartCount();
+        }
+    });
+});
+
+function updateCartCount() {
+    let cartItems = JSON.parse(localStorage.getItem("cart")) || [];
+    let totalCount = cartItems.reduce((sum, item) => sum + item.quantity, 0);
+    const cartCountElement = document.querySelector(".cart-count");
+
+    if (cartCountElement) {
+        cartCountElement.textContent = totalCount;
+    }
+}
+  </script>
 </body>
 </html>
