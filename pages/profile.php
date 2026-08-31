@@ -24,15 +24,12 @@ $stmt->close();
 
 $profilePic = $profilePic ? "../uploads/$profilePic" : "../assets/images/default.png";
 ?>
-
-
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Profile</title>
+    <title>Profile | Bulldogs Exchange</title>
 
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -41,9 +38,9 @@ $profilePic = $profilePic ? "../uploads/$profilePic" : "../assets/images/default
     <!-- Custom CSS -->
     <link rel="stylesheet" href="../assets/style/profile.css">
 </head>
-<body>
+<body class="profile-body">
 
-<!-- Navbar -->
+    <!-- Navbar -->
     <nav class="navbar navbar-expand-lg fixed-top">
       <div class="container-fluid">
           <a class="navbar-brand" href="dashboard.html">
@@ -53,18 +50,10 @@ $profilePic = $profilePic ? "../uploads/$profilePic" : "../assets/images/default
           </button>
           <div class="collapse navbar-collapse" id="navbarNav">
               <ul class="navbar-nav">
-                  <li class="nav-item">
-                      <a class="nav-link" href="dashboard.html#new">New & Featured</a>
-                  </li>
-                  <li class="nav-item">
-                      <a class="nav-link" href="dashboard.html#uniforms">Uniforms</a>
-                  </li>
-                  <li class="nav-item">
-                      <a class="nav-link" href="dashboard.html#bags">Bags</a>
-                  </li>
-                  <li class="nav-item">
-                      <a class="nav-link" href="dashboard.html#accessories">Accessories</a>
-                  </li>
+                  <li class="nav-item"><a class="nav-link" href="dashboard.html#new">New & Featured</a></li>
+                  <li class="nav-item"><a class="nav-link" href="dashboard.html#uniforms">Uniforms</a></li>
+                  <li class="nav-item"><a class="nav-link" href="dashboard.html#bags">Bags</a></li>
+                  <li class="nav-item"><a class="nav-link" href="dashboard.html#accessories">Accessories</a></li>
               </ul>
               <div class="nav-actions">
                   <div class="search-wrapper">
@@ -86,7 +75,6 @@ $profilePic = $profilePic ? "../uploads/$profilePic" : "../assets/images/default
                           </form>
                       </div>
                   </div>
-                  
                   <a href="#">
                       <button class="nav-icon-btn" type="button" aria-label="Shopping Cart">
                           <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -97,16 +85,15 @@ $profilePic = $profilePic ? "../uploads/$profilePic" : "../assets/images/default
                           <span class="cart-count">1</span>
                       </button>
                   </a>
-                  
                   <div class="profile-dropdown">
                     <a href="profile.php" class="nav-icon-btn">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                             <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
                             <circle cx="12" cy="7" r="4"></circle>
                         </svg>
-                    </a>            
+                    </a>
                       <div id="profileMenu" class="profile-menu">
-                          <a href="profile.html" class="profile-item">View Profile</a>
+                          <a href="profile.php" class="profile-item">View Profile</a>
                           <a href="https://www.facebook.com/NUBulldogsExchangeOfficial/" target="_blank" class="profile-item">FB Page</a>
                           <a href="new-login.html" class="profile-item">Logout</a>
                       </div>
@@ -114,97 +101,100 @@ $profilePic = $profilePic ? "../uploads/$profilePic" : "../assets/images/default
               </div>
           </div>
       </div>
-    </nav> 
-  <div class="profile-container">
-    <main class="profile-content">
-      <h1 class="profile-title">My Profile</h1>
-      <section class="profile-details">
-        <div class="profile-info-container">
-          <div class="profile-info-sections">
-            <div class="labels-section">
-              <div class="info-labels">
-                <h2 class="info-label">Student Number</h2>
-                <h2 class="info-label">Name</h2>
-                <h2 class="info-label email-label">Email</h2>
-              </div>
+    </nav>
+
+    <div class="profile-container">
+        <main class="profile-content">
+            <div class="profile-card">
+                <div class="profile-header">
+                    <div class="avatar-wrapper">
+                        <img src="<?php echo $profilePic ?? 'default.png'; ?>" class="profile-image" alt="Profile Picture" />
+                        <div class="avatar-overlay">
+                            <form class="uploadForm" action="../backend/upload_profile_pic.php" method="POST" enctype="multipart/form-data">
+                                <input type="file" name="profile_image" id="fileInput" accept="image/*" required hidden>
+                                <label for="fileInput" class="custom-file-btn">Change Photo</label>
+                                <button type="submit" class="upload-btn">Upload</button>
+                            </form>
+                        </div>
+                    </div>
+                    <div class="user-info-header">
+                        <h1 class="display-4 fw-bold"><?php echo htmlspecialchars($name); ?></h1>
+                        <p class="text-muted lead"><?php echo htmlspecialchars($id_number); ?></p>
+                    </div>
+                </div>
+
+                <div class="profile-body">
+                    <div class="info-grid">
+                        <div class="info-row">
+                            <label class="info-label">Full Name</label>
+                            <div class="input-group">
+                                <input type="text" id="nameInput" class="form-control" value="<?php echo htmlspecialchars($name); ?>" readonly />
+                                <button class="btn btn-primary" id="editName">Edit</button>
+                                <button class="btn btn-success" id="saveName" style="display: none;">Save</button>
+                            </div>
+                        </div>
+                        <div class="info-row">
+                            <label class="info-label">Email Address</label>
+                            <div class="input-group">
+                                <input type="email" id="emailInput" class="form-control" value="<?php echo htmlspecialchars($email); ?>" readonly />
+                                <button class="btn btn-primary" id="editEmail">Edit</button>
+                                <button class="btn btn-success" id="saveEmail" style="display: none;">Save</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="profile-footer">
+                        <button class="btn btn-danger logout-btn" onclick="window.location.href='login.html'">Logout</button>
+                    </div>
+                </div>
             </div>
-            <div class="inputs-section">
-              <div class="info-inputs">
-                <p class="info-input"><?php echo htmlspecialchars($id_number); ?></p> 
-                <input class="info-input" type="text" id="nameInput" value="<?php echo htmlspecialchars($name); ?>" readonly />
-                <button class="edit-button" id="editName">Edit</button>
-                <button class="edit-button" id="saveName" style="display: none;">Save</button>
 
-                <input class="info-input" type="email" id="emailInput" value="<?php echo htmlspecialchars($email); ?>" readonly />
-                <button class="edit-button" id="editEmail">Edit</button>
-                <button class="edit-button" id="saveEmail" style="display: none;">Save</button>
-              </div>
-            </div>
-            <div class="profile-image-section">
-              <img src="<?php echo $profilePic ?? 'default.png'; ?>" class="profile-image" alt="Profile Picture" />
-              <form class="uploadForm" action="../backend/upload_profile_pic.php" method="POST" enctype="multipart/form-data">
-                <input type="file" name="profile_image" id="fileInput" accept="image/*" required hidden>
-                <label for="fileInput" class="custom-file-btn">Choose File</label>
-                <button type="submit" class="upload-btn">Upload</button>
-              </form>
-              <button class="logout-button" onclick="window.location.href='login.html'">Logout</button>
-            </div>
-          </div>
-        </div>
-      </section>
+            <hr class="divider" />
 
-      <hr class="divider" />
-  
-      <footer class="footer">
-        <div class="footer-content">
-            <div class="footer-section">
-              <h2 class="footer-title">Resources</h2>
-              <a href="#" class="footer-link">Send Us A Feedback</a>
-              <p class="copyright">2025 National University. All rights reserved</p>
-            </div>
-            <div class="footer-section">
-              <h2 class="footer-title">Help</h2>
-              <nav class="footer-nav">
-                <a href="#" class="footer-link">Get Help</a>
-                <a href="#" class="footer-link">Returns</a>
-                <a href="#" class="footer-link">Payment Options</a>
-                <a href="#" class="footer-link">Contact Us</a>
-              </nav>
-            </div>
-          </div>
-          <img src="../assets/images/nulogo.png" class="footer-image" />
-      </footer>
-    </main>
-  </div>
+            <footer class="footer">
+                <div class="footer-content">
+                    <div class="footer-section">
+                        <h2 class="footer-title">Resources</h2>
+                        <a href="#" class="footer-link">Send Us A Feedback</a>
+                        <p class="copyright">2025 National University. All rights reserved</p>
+                    </div>
+                    <div class="footer-section">
+                        <h2 class="footer-title">Help</h2>
+                        <nav class="footer-nav">
+                            <a href="#" class="footer-link">Get Help</a>
+                            <a href="#" class="footer-link">Returns</a>
+                            <a href="#" class="footer-link">Payment Options</a>
+                            <a href="#" class="footer-link">Contact Us</a>
+                        </nav>
+                    </div>
+                </div>
+                <img src="../assets/images/nulogo.png" class="footer-image" />
+            </footer>
+        </main>
+    </div>
 
-  <script src="Javascripts/profile.js"></script>
-
-  <script>
-    document.addEventListener("DOMContentLoaded", () => {
-    updateCartCount(); // Show initial count
-
-    // 👂 Listen for cart updates in same tab
-    window.addEventListener("cart-updated", () => {
-        updateCartCount();
-    });
-
-    // 👂 Listen for updates from other tabs
-    window.addEventListener("storage", (e) => {
-        if (e.key === "cart") {
+    <script src="Javascripts/profile.js"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
             updateCartCount();
+            window.addEventListener("cart-updated", () => {
+                updateCartCount();
+            });
+            window.addEventListener("storage", (e) => {
+                if (e.key === "cart") {
+                    updateCartCount();
+                }
+            });
+        });
+
+        function updateCartCount() {
+            let cartItems = JSON.parse(localStorage.getItem("cart")) || [];
+            let totalCount = cartItems.reduce((sum, item) => sum + item.quantity, 0);
+            const cartCountElement = document.querySelector(".cart-count");
+            if (cartCountElement) {
+                cartCountElement.textContent = totalCount;
+            }
         }
-    });
-});
-
-function updateCartCount() {
-    let cartItems = JSON.parse(localStorage.getItem("cart")) || [];
-    let totalCount = cartItems.reduce((sum, item) => sum + item.quantity, 0);
-    const cartCountElement = document.querySelector(".cart-count");
-
-    if (cartCountElement) {
-        cartCountElement.textContent = totalCount;
-    }
-}
-  </script>
+    </script>
 </body>
 </html>

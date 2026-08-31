@@ -3,17 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Payment</title>
+    <title>Checkout | Bulldogs Exchange</title>
 
     <!-- bootstrap -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 
     <!-- css -->
     <link rel="stylesheet" href="../assets/style/payment.css">
 </head>
-<body>
-  <div class="payment-content">
+<body class="payment-body">
+    <!-- Navbar -->
     <nav class="navbar navbar-expand-lg fixed-top">
       <div class="container-fluid">
           <a class="navbar-brand" href="dashboard.html">
@@ -23,18 +23,10 @@
           </button>
           <div class="collapse navbar-collapse" id="navbarNav">
               <ul class="navbar-nav">
-                  <li class="nav-item">
-                      <a class="nav-link" href="dashboard.html#new">New & Featured</a>
-                  </li>
-                  <li class="nav-item">
-                      <a class="nav-link" href="dashboard.html#uniforms">Uniforms</a>
-                  </li>
-                  <li class="nav-item">
-                      <a class="nav-link" href="dashboard.html#bags">Bags</a>
-                  </li>
-                  <li class="nav-item">
-                      <a class="nav-link" href="dashboard.html#accessories">Accessories</a>
-                  </li>
+                  <li class="nav-item"><a class="nav-link" href="dashboard.html#new">New & Featured</a></li>
+                  <li class="nav-item"><a class="nav-link" href="dashboard.html#uniforms">Uniforms</a></li>
+                  <li class="nav-item"><a class="nav-link" href="dashboard.html#bags">Bags</a></li>
+                  <li class="nav-item"><a class="nav-link" href="dashboard.html#accessories">Accessories</a></li>
               </ul>
               <div class="nav-actions">
                   <div class="search-wrapper">
@@ -56,25 +48,23 @@
                           </form>
                       </div>
                   </div>
-                  
-                  <a href="#">
+                  <a href="cart.html">
                       <button class="nav-icon-btn" type="button" aria-label="Shopping Cart">
                           <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                               <circle cx="9" cy="21" r="1"></circle>
                               <circle cx="20" cy="21" r="1"></circle>
                               <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
                           </svg>
-                          <span class="cart-count">1</span>
+                          <span class="cart-count">0</span>
                       </button>
                   </a>
-                  
                   <div class="profile-dropdown">
                     <a href="profile.php" class="nav-icon-btn">
-                      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                          <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
-                          <circle cx="12" cy="7" r="4"></circle>
-                      </svg>
-                  </a>            
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                            <circle cx="12" cy="7" r="4"></circle>
+                        </svg>
+                    </a>
                       <div id="profileMenu" class="profile-menu">
                           <a href="profile.php" class="profile-item">View Profile</a>
                           <a href="https://www.facebook.com/NUBulldogsExchangeOfficial/" target="_blank" class="profile-item">FB Page</a>
@@ -85,107 +75,229 @@
           </div>
       </div>
     </nav>
-    
-    <main class="payment-container">
-      <section class="payment-header">
-        <div class="payment-title-container">
-          <a href="cart.html">
-            <img
-            src="../assets/images/back_ic.png"
-            class="back-icon"
-            alt="Back Icon"
-            />
-          </a>
-          <h1 class="payment-title">Payment Method</h1>
-        </div>
-      </section>
-    
-      <section class="delivery-section">
-        <div class="delivery-content">
-          <div class="address-details">
-            <div class="address-container">
-              <h2 class="delivery-title">Delivery Address</h2>
-              <img
-                src="../assets/images/address.png"
-                class="address-map"
-                alt="Delivery Address Map"
-              />
+
+    <div class="checkout-container">
+        <main class="checkout-main">
+            <div class="checkout-grid">
+                <!-- Left Column: Payment & Shipping -->
+                <div class="checkout-left">
+                    <div class="checkout-card">
+                        <div class="card-header-flex">
+                            <a href="cart.html" class="back-link">
+                                <img src="../assets/images/back_ic.png" alt="Back" class="back-icon">
+                                <span class="back-text">Back to Cart</span>
+                            </a>
+                            <h2 class="checkout-title">Complete Your Order</h2>
+                        </div>
+
+                        <!-- Shipping Section -->
+                        <section class="checkout-section">
+                            <div class="section-title">
+                                <span class="step-number">1</span>
+                                <h3>Delivery Details</h3>
+                            </div>
+                            <div class="shipping-form-container">
+                                <div class="form-grid">
+                                    <div class="form-group full-width">
+                                        <label>Full Name</label>
+                                        <input type="text" placeholder="Enter your full name" required>
+                                    </div>
+                                    <div class="form-group full-width">
+                                        <label>Contact Number</label>
+                                        <div class="input-with-prefix">
+                                            <span class="prefix">+63</span>
+                                            <input type="tel" placeholder="9XX XXX XXXX" maxlength="10" required>
+                                        </div>
+                                    </div>
+                                    <div class="form-group full-width">
+                                        <label>House No., Street, Barangay</label>
+                                        <input type="text" placeholder="e.g. B/A house 2, new land, 2500" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>City / Municipality</label>
+                                        <input type="text" placeholder="Enter city" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Province / Zip Code</label>
+                                        <input type="text" placeholder="e.g. Metro Manila, 1000" required>
+                                    </div>
+                                </div>
+                                <div class="shipping-footer">
+                                    <div class="shipping-badge">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v2"></path><path d="M18 10a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2v0a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v0z"></path><path d="M12 12v8"></path><path d="m16 16-4 4-4-4"></path></svg>
+                                        <span>Express Shipping</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+
+                        <!-- Payment Section -->
+                        <section class="checkout-section">
+                            <div class="section-title">
+                                <span class="step-number">2</span>
+                                <h3>Payment Method</h3>
+                            </div>
+                            <div class="payment-options">
+                                <div class="payment-method active" data-method="gcash">
+                                    <div class="method-icon-wrapper">
+                                        <img src="../assets/images/gcash.png" alt="GCash">
+                                    </div>
+                                    <span class="method-name">GCash</span>
+                                    <div class="method-check">✓</div>
+                                </div>
+                                <div class="payment-method" data-method="maya">
+                                    <div class="method-icon-wrapper">
+                                        <img src="../assets/images/gcash.png" alt="Maya" style="filter: hue-rotate(90deg);">
+                                    </div>
+                                    <span class="method-name">Maya</span>
+                                    <div class="method-check">✓</div>
+                                </div>
+                                <div class="payment-method" data-method="bank">
+                                    <div class="method-icon-wrapper">
+                                        <img src="../assets/images/gcash.png" alt="Bank" style="filter: grayscale(1);">
+                                    </div>
+                                    <span class="method-name">Bank Transfer</span>
+                                    <div class="method-check">✓</div>
+                                </div>
+                            </div>
+                            <div class="payment-input-wrapper">
+                                <label for="payment-detail">Account Number / Phone</label>
+                                <div class="input-field">
+                                    <span class="input-prefix">+63</span>
+                                    <input type="tel" id="payment-detail" placeholder="9XX XXX XXXX" maxlength="10">
+                                    <img src="../assets/images/check.png" alt="verified" class="verification-icon">
+                                </div>
+                            </div>
+                        </section>
+                    </div>
+                </div>
+
+                <!-- Right Column: Order Summary -->
+                <div class="checkout-right">
+                    <div class="summary-card">
+                        <h3 class="summary-title">Order Summary</h3>
+                        <div id="order-items" class="order-items">
+                            <div class="loading-text">Loading your items...</div>
+                        </div>
+                        <div class="summary-divider"></div>
+                        <div class="summary-row">
+                            <span>Subtotal</span>
+                            <span id="summary-subtotal">₱0.00</span>
+                        </div>
+                        <div class="summary-row">
+                            <span>Shipping</span>
+                            <span class="text-success">Free</span>
+                        </div>
+                        <div class="summary-row total">
+                            <span>Total Amount</span>
+                            <span id="summary-total">₱0.00</span>
+                        </div>
+                        <button id="place-order-btn" class="btn-place-order">Place Order Now</button>
+                        <div class="secure-checkout">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
+                            Secure SSL Encrypted Checkout
+                        </div>
+                    </div>
+                </div>
             </div>
-            <div class="address-info">
-              <h3 class="address-type">Home</h3>
-              <p class="address-text">
-                B/A house 2,<br />
-                new land<br />
-                2500
-              </p>
-            </div>
-          </div>
-          <img
-            src="../assets/images/qr.png"
-            class="qr-code"
-            alt="QR Code"
-          />
-        </div>
-      </section>
-    
-      <section class="payment-method-section">
-        <h2 class="add-payment-title">Add Payment Method</h2>
-        <div class="payment-input">
-          <img
-            src="../assets/images/gcash.png"
-            class="payment-method-icon"
-            alt="Payment Method Icon"
-          />
-          <input 
-          type="tel" 
-          class="phone-number-input" 
-          placeholder="+63 *** **** 3214" 
-          maxlength="13"
-        />
-          <img
-            src="../assets/images/check.png"
-            class="verification-icon"
-            alt="Verification Icon"
-          />
-        </div>
-      </section>
-    
-      <section class="total-section">
-        <div class="total-container">
-          <div class="total-details">
-            <h2 class="total-label">Total:</h2>
-            <button class="details-button">See Details</button>
-          </div>
-          <p class="total-amount">P 150.00</p>
-        </div>
-        <button class="proceed-button">Proceed</button>
-      </section>
-    
-      <hr class="divider" />
-  
-      <footer class="footer">
-        <div class="footer-content">
-            <div class="footer-section">
-              <h2 class="footer-title">Resources</h2>
-              <a href="#" class="footer-link">Send Us A Feedback</a>
-              <p class="copyright">2025 National University. All rights reverved</p>
-            </div>
-            <div class="footer-section">
-              <h2 class="footer-title">Help</h2>
-              <nav class="footer-nav">
-                <a href="#" class="footer-link">Get Help</a>
-                <a href="#" class="footer-link">Returns</a>
-                <a href="#" class="footer-link">Payment Options</a>
-                <a href="#" class="footer-link">Contact Us</a>
-              </nav>
-            </div>
-          </div>
-          <img
-            src="../assets/images/nulogo.png"
-            class="footer-image"
-          />
-      </footer>
-    </main>
-  </div>
+
+            <hr class="divider" />
+
+            <footer class="footer">
+                <div class="footer-content">
+                    <div class="footer-section">
+                        <h2 class="footer-title">Resources</h2>
+                        <a href="#" class="footer-link">Send Us A Feedback</a>
+                        <p class="copyright">2025 National University. All rights reserved</p>
+                    </div>
+                    <div class="footer-section">
+                        <h2 class="footer-title">Help</h2>
+                        <nav class="footer-nav">
+                            <a href="#" class="footer-link">Get Help</a>
+                            <a href="#" class="footer-link">Returns</a>
+                            <a href="#" class="footer-link">Payment Options</a>
+                            <a href="#" class="footer-link">Contact Us</a>
+                        </nav>
+                    </div>
+                </div>
+                <img src="../assets/images/nulogo.png" class="footer-image" />
+            </footer>
+        </main>
+    </div>
+
+    <script>
+        function loadOrderSummary() {
+            const cartItems = JSON.parse(localStorage.getItem("cart")) || [];
+            const itemsContainer = document.getElementById("order-items");
+            const subtotalEl = document.getElementById("summary-subtotal");
+            const totalEl = document.getElementById("summary-total");
+
+            if (cartItems.length === 0) {
+                itemsContainer.innerHTML = '<p class="empty-msg">Your cart is empty</p>';
+                subtotalEl.textContent = '₱0.00';
+                totalEl.textContent = '₱0.00';
+                return;
+            }
+
+            let html = '';
+            let total = 0;
+
+            cartItems.forEach(item => {
+                const priceValue = parseFloat(item.price.replace("₱", "").replace(/,/g, ""));
+                const subtotal = priceValue * item.quantity;
+                total += subtotal;
+                html += `
+                    <div class="order-item">
+                        <img src="${item.image}" alt="${item.name}" class="item-thumb">
+                        <div class="item-info">
+                            <span class="item-name">${item.name}</span>
+                            <span class="item-variant">${item.size || ''}</span>
+                        </div>
+                        <div class="item-qty">x${item.quantity}</div>
+                        <div class="item-price">₱${subtotal.toFixed(2)}</div>
+                    </div>
+                `;
+            });
+
+            itemsContainer.innerHTML = html;
+            subtotalEl.textContent = `₱${total.toFixed(2)}`;
+            totalEl.textContent = `₱${total.toFixed(2)}`;
+        }
+
+        document.querySelectorAll('.payment-method').forEach(method => {
+            method.addEventListener('click', () => {
+                document.querySelectorAll('.payment-method').forEach(m => m.classList.remove('active'));
+                method.classList.add('active');
+            });
+        });
+
+        document.getElementById('place-order-btn').addEventListener('click', function() {
+            const detail = document.getElementById('payment-detail').value;
+            if (!detail) {
+                alert('Please enter your payment details');
+                return;
+            }
+
+            this.disabled = true;
+            this.innerHTML = 'Processing...';
+
+            setTimeout(() => {
+                alert('Order placed successfully! Thank you for shopping with Bulldogs Exchange.');
+                localStorage.removeItem('cart');
+                window.location.href = 'dashboard.html';
+            }, 2000);
+        });
+
+        document.addEventListener('DOMContentLoaded', () => {
+            loadOrderSummary();
+            const updateCount = () => {
+                let cartItems = JSON.parse(localStorage.getItem("cart")) || [];
+                let totalCount = cartItems.reduce((sum, item) => sum + item.quantity, 0);
+                const el = document.querySelector(".cart-count");
+                if (el) el.textContent = totalCount;
+            };
+            updateCount();
+        });
+    </script>
 </body>
 </html>

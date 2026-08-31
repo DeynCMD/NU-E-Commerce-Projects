@@ -32,54 +32,93 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     }
 
-    // Add to cart buttons — attach only once
-    document.querySelectorAll(".add-cart-btn").forEach(button => {
-        // Remove any previous listeners (in case of re-run)
-        button.replaceWith(button.cloneNode(true));
-    });
-    document.querySelectorAll(".add-cart-btn").forEach(button => {
-        button.addEventListener("click", function (event) {
-            event.preventDefault();
+    // Global Add to Cart handler using event delegation
+    document.addEventListener("click", function (event) {
+        const button = event.target.closest(".add-cart-btn, .add-to-cart-btn");
+        if (!button) return;
+        event.preventDefault();
 
-            const uniformCard = this.closest(".uniform-card");
-            const itemName = uniformCard.querySelector("h3").textContent.trim();
-            const itemPrice = uniformCard.querySelector(".uniform-price").textContent.trim();
-            const itemImage = uniformCard.querySelector(".uniform-image").src;
-            const selectedSize = uniformCard.querySelector(".size-btn.selected")?.textContent.trim();
+        let itemName, itemPrice, itemImage, selectedSize = null;
+        let card = null;
+
+        // 1. Check for Uniform Card
+        card = button.closest(".uniform-card");
+        if (card) {
+            itemName = card.querySelector("h3")?.textContent?.trim();
+            itemPrice = card.querySelector(".uniform-price")?.textContent?.trim();
+            itemImage = card.querySelector(".uniform-image")?.src;
+            selectedSize = card.querySelector(".size-btn.selected")?.textContent?.trim();
 
             if (!selectedSize) {
                 alert("Please select a size first!");
                 return;
             }
-
-            // Load existing cart
-            let cartItems = JSON.parse(localStorage.getItem("cart")) || [];
-
-            // Find existing item by name and size (case-insensitive)
-            const existingItem = cartItems.find(item =>
-                item.name.toLowerCase() === itemName.toLowerCase() &&
-                item.size.toLowerCase() === selectedSize.toLowerCase()
-            );
-
-            if (existingItem) {
-                existingItem.quantity += 1;
-            } else {
-                cartItems.push({
-                    name: itemName,
-                    price: itemPrice,
-                    image: itemImage,
-                    size: selectedSize,
-                    quantity: 1
-                });
+        }
+        // 2. Check for Bag Card
+        else if (card = button.closest(".bag-card")) {
+            itemName = card.querySelector("h3")?.textContent?.trim();
+            itemPrice = card.querySelector(".price")?.textContent?.trim();
+            itemImage = card.querySelector(".bag-image img")?.src;
+        }
+        // 3. Check for Accessory Card
+        else if (card = button.closest(".accessory-card")) {
+            itemName = card.querySelector("h3")?.textContent?.trim();
+            itemPrice = card.querySelector(".price")?.textContent?.trim();
+            itemImage = card.querySelector(".accessory-image img")?.src;
+        }
+        // 4. Fallback for other product pages (like product.html)
+        else {
+            // Try to find common patterns
+            const productContainer = button.closest(".product-info, .product-details, .product-container");
+            if (productContainer) {
+                itemName = productContainer.querySelector(".product-title, h1, h2, h3")?.textContent?.trim();
+                itemPrice = productContainer.querySelector(".product-price, .price")?.textContent?.trim();
+                itemImage = productContainer.querySelector(".product-image img, .product-image")?.src ||
+                             productContainer.querySelector("img")?.src;
             }
+        }
 
-            // Save to storage
-            localStorage.setItem("cart", JSON.stringify(cartItems));
+        if (!itemName || !itemPrice) {
+            console.error("Could not extract product details for:", button);
+            return;
+        }
 
-            // Update UI immediately
-            updateCartCount();
-            window.dispatchEvent(new Event("cart-updated"));
-        });
+        // Load existing cart
+        let cartItems = JSON.parse(localStorage.getItem("cart")) || [];
+
+        // Find existing item by name and size (case-insensitive)
+        const existingItem = cartItems.find(item =>
+            item.name.toLowerCase() === itemName.toLowerCase() &&
+            (selectedSize === null || item.size === null || item.size.toLowerCase() === selectedSize.toLowerCase())
+        );
+
+        if (existingItem) {
+            existingItem.quantity += 1;
+        } else {
+            cartItems.push({
+                name: itemName,
+                price: itemPrice,
+                image: itemImage,
+                size: selectedSize,
+                quantity: 1
+            });
+        }
+
+        // Save to storage
+        localStorage.setItem("cart", JSON.stringify(cartItems));
+
+        // Feedback animation
+        const originalHTML = button.innerHTML;
+        button.innerHTML = '<span class="btn-text">Added!</span> ✓';
+        button.style.backgroundColor = "#4CAF50";
+        setTimeout(() => {
+            button.innerHTML = originalHTML;
+            button.style.backgroundColor = "";
+        }, 2000);
+
+        // Update UI immediately
+        updateCartCount();
+        window.dispatchEvent(new Event("cart-updated"));
     });
 });
 
